@@ -8,8 +8,8 @@ title: Teaching a Humanoid to Move — a zero-background RL curriculum
 A human-shaped robot taught itself to walk inside a computer — with no rules
 about how to move, no programmer specifying joint angles, no motion-capture
 suit. Just a score, millions of practice attempts, and a physics simulator
-running faster than real time. Then it taught itself to run, cartwheel,
-backflip, and get up off the floor.
+running faster than real time. Then it taught itself to cartwheel,
+backflip, and get up off the floor (it also tried to run, and failed instructively).
 
 This is a fifteen-chapter curriculum that takes you through that whole arc
 from the beginning, with **zero background in robotics or machine learning

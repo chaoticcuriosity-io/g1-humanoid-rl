@@ -2,7 +2,7 @@
 
 Reinforcement-learning experiments teaching a Unitree G1 humanoid whole-body skills in simulation. Built on [mjlab](https://github.com/mujocolab/mjlab) (Isaac-Lab-style API on MuJoCo-Warp), running on an NVIDIA DGX Spark (aarch64, CUDA 13, sm_121 Blackwell).
 
-*A [Chaotic Curiosity](https://chaoticcuriosity.io) project. A hands-on, zero-background 15-chapter RL curriculum (walking → running → cartwheel → backflip → get-up) is published at [chaoticcuriosity-io.github.io/g1-humanoid-rl](https://chaoticcuriosity-io.github.io/g1-humanoid-rl/).*
+*A [Chaotic Curiosity](https://chaoticcuriosity.io) project. A hands-on, zero-background 15-chapter RL curriculum (walking → a failed attempt at running → cartwheel → backflip → get-up) is published at [chaoticcuriosity-io.github.io/g1-humanoid-rl](https://chaoticcuriosity-io.github.io/g1-humanoid-rl/).*
 
 Trained skills so far:
 
@@ -25,7 +25,7 @@ The writeup of how the cartwheel was produced — including the failure modes, t
 | 04 | Earlier snapshot at iter 4 500 — the policy was already completing cartwheels here. | [04_cartwheel_mid_4500.mp4](https://drive.google.com/file/d/1L5IQ4g37vXRuAO22yNiUGP-amPEHC2YW/view) |
 | 05 | **Failed iteration B**, shown for contrast. Looser thresholds + warm-start hit a bad local optimum where the policy flops instead of cartwheeling. Illustrates the scorer bug. | [05_iterB_fail_for_contrast.mp4](https://drive.google.com/file/d/1wg8L8X5Cog5CxOoLFyEJswWKSU--ARMD/view) |
 | 06 | Velocity-policy learning progression — 22 checkpoints from iter 0 to 2050, same robot seen getting progressively better at walking in a 26 s video. | [06_velocity_policy_progression.mp4](https://drive.google.com/file/d/1dJMfoeCxdqBSoKXlsX7VXq7nAHLZhdPU/view) |
-| 07 | OmniXtreme G1 backflip reference motion replayed (no policy). Illustrates why SMPL-X → humanoid retargeting quality degrades during aerial phases. | [07_backflip_omnixtreme_ref.mp4](https://drive.google.com/file/d/1yfqD2SRSo6xqoPHbdBTCNaZl3Vl09bbm/view) |
+| 07 | OmniXtreme G1 backflip reference motion replayed (no policy). Illustrates why SMPL-X → humanoid retargeting quality degrades during aerial phases. The trained policy's landed backflip is in [Ch. 13](https://chaoticcuriosity-io.github.io/g1-humanoid-rl/reports/13-the-backflip-in-three-attempts.html). | [07_backflip_omnixtreme_ref.mp4](https://drive.google.com/file/d/1yfqD2SRSo6xqoPHbdBTCNaZl3Vl09bbm/view) |
 
 ## Repository contents
 
