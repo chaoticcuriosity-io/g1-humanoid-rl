@@ -1,7 +1,7 @@
 # `Mjlab-Recovery-Flat-Unitree-G1` — the get-up task source
 
 This directory is the **new mjlab task** written for the get-up / fall-recovery
-spine policy. It is the source behind [`docs/reports/getting-up.md`](../docs/reports/getting-up.md)
+spine policy. It is the source behind [`docs/reports/14-building-get-up-from-scratch.md`](../docs/reports/14-building-get-up-from-scratch.md)
 and the spec [`2026-06-19-spine-getup-recovery.md`](../docs/superpowers/specs/2026-06-19-spine-getup-recovery.md).
 
 Unlike every other task in this repo (which are config overrides on stock mjlab

@@ -77,7 +77,7 @@ But imitation does not escape the thesis — it relocates it. Two new traps appe
 
 The cartwheel did, eventually, work — a real, frame-confirmed sideways inversion landing on both feet, after a clean single-cartwheel reference, the right thresholds, and a fresh training run. The full engineering log is the [cartwheel journey](../cartwheel-journey.md).
 
-Chapter 13 ran the same paradigm at higher difficulty — a **backflip** — and added one new tool: the **gated reward.** A backflip needs the robot *inverted* in the middle and *upright* at the end — contradictory states no single always-on reward can satisfy. The `landing_feet_upright` term (full source in [`../../backflip-v3/`](../../backflip-v3/)) solves it by switching on *only* in the last 40% of the clip, where "be upright on your feet" finally agrees with the reference. Three attempts: tight thresholds (never leaves the ground) → loose thresholds (airborne, **lands on its back**) → gated landing reward (full inversion, lands on its feet). And the honest result, not sanded smooth: **the backflip lands in a recovering crouch, not a crisp gymnast's stick.** It launches, fully inverts, and comes down on its feet — unmistakably a backflip — but it squats deep to absorb the landing before recovering. That gap is real, and it is named, not hidden.
+Chapter 13 ran the same paradigm at higher difficulty — a **backflip** — and added one new tool: the **gated reward.** A backflip needs the robot *inverted* in the middle and *upright* at the end — contradictory states no single always-on reward can satisfy. The `landing_feet_upright` term (full source in [`../../backflip-v3/`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/tree/main/backflip-v3)) solves it by switching on *only* in the last 40% of the clip, where "be upright on your feet" finally agrees with the reference. Three attempts: tight thresholds (never leaves the ground) → loose thresholds (airborne, **lands on its back**) → gated landing reward (full inversion, lands on its feet). And the honest result, not sanded smooth: **the backflip lands in a recovering crouch, not a crisp gymnast's stick.** It launches, fully inverts, and comes down on its feet — unmistakably a backflip — but it squats deep to absorb the landing before recovering. That gap is real, and it is named, not hidden.
 
 ### Movement IV — from-scratch tasks: the reward is the *whole* specification
 
@@ -123,8 +123,8 @@ You now have the full method. Here is where to take it.
 
 **The code, for the curious.** Two tasks in this series required code you can read end to end:
 
-- [`../../recovery-task/`](../../recovery-task/) — the complete from-scratch get-up task: the four-pose reset (`mdp/events.py`), the monotonic height-ramp reward (`mdp/rewards.py`), the deliberately-*not*-wired success termination (`mdp/terminations.py`, with the comment explaining why), and the final weight config (`config/g1/env_cfgs.py`).
-- [`../../backflip-v3/`](../../backflip-v3/) — the `landing_feet_upright` gated reward, the `gate × upright × feet_down` product worked through in Chapter 13.
+- [`../../recovery-task/`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/tree/main/recovery-task) — the complete from-scratch get-up task: the four-pose reset (`mdp/events.py`), the monotonic height-ramp reward (`mdp/rewards.py`), the deliberately-*not*-wired success termination (`mdp/terminations.py`, with the comment explaining why), and the final weight config (`config/g1/env_cfgs.py`).
+- [`../../backflip-v3/`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/tree/main/backflip-v3) — the `landing_feet_upright` gated reward, the `gate × upright × feet_down` product worked through in Chapter 13.
 
 **The next experiments.** This curriculum trained a handful of skills, but the repo ships **ready-to-run specs** for many more — complete enough to launch without re-designing the task. They are grouped by tier:
 
@@ -163,4 +163,4 @@ You came in not knowing what a simulator was. You are leaving knowing how to mak
 
 ---
 
-*Unitree G1, MuJoCo-Warp simulator on a DGX Spark. This chapter is a synthesis — it introduces no new experiments. Every result it references was produced and confirmed in chapters 01–14; the toolkit behind them is consolidated in [methods-reference.md](methods-reference.md), and the from-scratch task and gated-reward code are in [`../../recovery-task/`](../../recovery-task/) and [`../../backflip-v3/`](../../backflip-v3/).*
+*Unitree G1, MuJoCo-Warp simulator on a DGX Spark. This chapter is a synthesis — it introduces no new experiments. Every result it references was produced and confirmed in chapters 01–14; the toolkit behind them is consolidated in [methods-reference.md](methods-reference.md), and the from-scratch task and gated-reward code are in [`../../recovery-task/`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/tree/main/recovery-task) and [`../../backflip-v3/`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/tree/main/backflip-v3).*

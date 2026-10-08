@@ -99,7 +99,7 @@ The gate solves this by restricting the landing reward to the last 40% of the re
 
 ### The reward we wrote: `landing_feet_upright`
 
-The landing reward is a new function, `landing_feet_upright`, that we added to the tracking task's reward module. The full source is in [`../../backflip-v3/landing_feet_upright.py`](../../backflip-v3/). Here is the shape:
+The landing reward is a new function, `landing_feet_upright`, that we added to the tracking task's reward module. The full source is in [`../../backflip-v3/landing_feet_upright.py`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/tree/main/backflip-v3). Here is the shape:
 
 ```python
 reward = gate * upright * feet_down   # all three in [0, 1]; product in [0, 1]
@@ -230,4 +230,4 @@ Next: [Chapter 14 — Building Get-Up from Scratch](14-building-get-up-from-scra
 
 ---
 
-*Unitree G1, flat terrain, MuJoCo-Warp on a DGX Spark. Task: `Mjlab-Tracking-Flat-Unitree-G1`. Reference: `smpl_backflip_to_g1.npz`, 88 frames at 50 fps (≈ 1.8 s). 4096 parallel environments, 20 000 iterations per attempt (~11 hours each). v1→v2: termination thresholds 0.5 m / 0.8 rad → 1.0 m / 1.5 rad. v3: + `landing_feet_upright` reward, weight 5.0, gated to last 40% of clip. Full landing reward code and config edits: [`../../backflip-v3/`](../../backflip-v3/).*
+*Unitree G1, flat terrain, MuJoCo-Warp on a DGX Spark. Task: `Mjlab-Tracking-Flat-Unitree-G1`. Reference: `smpl_backflip_to_g1.npz`, 88 frames at 50 fps (≈ 1.8 s). 4096 parallel environments, 20 000 iterations per attempt (~11 hours each). v1→v2: termination thresholds 0.5 m / 0.8 rad → 1.0 m / 1.5 rad. v3: + `landing_feet_upright` reward, weight 5.0, gated to last 40% of clip. Full landing reward code and config edits: [`../../backflip-v3/`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/tree/main/backflip-v3).*

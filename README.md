@@ -4,10 +4,12 @@ Reinforcement-learning experiments teaching a Unitree G1 humanoid whole-body ski
 
 *A [Chaotic Curiosity](https://chaoticcuriosity.io) project. A hands-on, zero-background 15-chapter RL curriculum (walking → running → cartwheel → backflip → get-up) is published at [chaoticcuriosity-io.github.io/g1-humanoid-rl](https://chaoticcuriosity-io.github.io/g1-humanoid-rl/).*
 
-Two trained skills so far:
+Trained skills so far:
 
-1. **Velocity tracking (walking)** — stock `Mjlab-Velocity-Flat-Unitree-G1` PPO policy, trained from scratch in ~46 min at 2048 envs. Reward 50.5, ep length 995/1000.
+1. **Velocity tracking (walking)** — stock `Mjlab-Velocity-Flat-Unitree-G1` PPO policy, trained from scratch in ~46 min at 2048 envs. Reward 50.5, ep length 995/1000. Spin-in-place works; backward walking is a partial success; running was attempted and failed (reward hacking — Ch. 9).
 2. **Cartwheel (tracking)** — custom pipeline: MimicKit G1 reference → mjlab tracking task → 20k-iter PPO policy that performs repeated full cartwheels with proper inversions and two-footed landings.
+3. **Backflip (tracking)** — same motion-imitation pipeline plus a gated landing reward; full inversion, lands on its feet in a recovering crouch (Ch. 13).
+4. **Get-up from a fall (custom task)** — a from-scratch `Mjlab-Recovery-Flat-Unitree-G1` task; stands up from four fallen poses (Ch. 14).
 
 The writeup of how the cartwheel was produced — including the failure modes, the bugs in the evaluation, and the final fix — is in [`docs/cartwheel-journey.md`](docs/cartwheel-journey.md) and is written for a non-technical reader.
 
@@ -35,6 +37,8 @@ docs/
   session-01-writeup.md      — end-to-end walkthrough of setting up mjlab on the DGX Spark and training the baseline walking policy
   dgx-spark-manual.md        — local copy of the DGX Spark setup manual (April 2026)
   reports/                   — 15-chapter beginner-friendly RL curriculum, zero background to deep (start at docs/reports/README.md)
+backflip-v3/                 — gated `landing_feet_upright` reward for the backflip tracking run (Ch. 13)
+recovery-task/               — source for the from-scratch `Mjlab-Recovery-Flat-Unitree-G1` get-up task (Ch. 14)
 scripts/
   record_policy.py           — headless multi-camera renderer for a trained tracking/velocity policy; supports --disable-terminations and telemetry dump
   play_motion_npz.py         — headless replay of a tracking motion.npz (reference motion, no policy)
@@ -93,7 +97,7 @@ setup-notes.md               — append-as-we-go log of actual setup deviations 
 - **Render must match training on thresholds.** Our first "success" video was an artifact of the eval having stricter thresholds than training — every attempt got cut off mid-flip.
 - **Quantitative scorers lie.** A pelvis-roll-through-180° scorer is fooled by crash-rolls where the robot is face-planting. Always pair auto-scoring with frame-by-frame visual inspection.
 - **SMPL-X → humanoid retargeting degrades in aerial phases.** The reference motion itself is only as good as the ground-contact constraint. For acrobatic motions, hand-curated retargeting (e.g., MimicKit's shipped G1 set) beats any automatic retargeter I tried.
-- **Reference-motion duration matters.** We accidentally asked the policy to learn two cartwheels back-to-back when the tooling cycled a 2.73 s source up to a 4 s target duration. Making the reference shorter than the policy's reach dramatically unblocked training.
+- **Reference-motion duration matters.** We accidentally asked the policy to learn two cartwheels back-to-back when a `pkl_to_csv --duration 4.0` tooling bug cycled the 2.73 s source into a 6 s, two-cartwheel reference. Making the reference shorter than the policy's reach dramatically unblocked training.
 
 ## Credit
 

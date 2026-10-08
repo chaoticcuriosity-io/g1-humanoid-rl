@@ -34,7 +34,7 @@ The new task is `Mjlab-Recovery-Flat-Unitree-G1`. It was built by cloning the fl
 3. The velocity command is zeroed. There is no locomotion target.
 4. The reward is rebuilt from the ground up to incentivize rising rather than walking.
 
-The full task source lives in [`../../recovery-task/`](../../recovery-task/). The rest of this section walks through the two novel pieces: the reset and the reward.
+The full task source lives in [`../../recovery-task/`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/tree/main/recovery-task). The rest of this section walks through the two novel pieces: the reset and the reward.
 
 ---
 
@@ -57,7 +57,7 @@ roll_values = torch.tensor(
 pitch_values = torch.tensor([0.0, math.pi / 2, 0.0, 0.0], device=env.device)
 ```
 
-The pelvis is placed 0.08–0.15 m above the floor — enough clearance for the body to rest on its side without clipping — and all velocities are zeroed. Full code: [`../../recovery-task/mdp/events.py`](../../recovery-task/mdp/events.py).
+The pelvis is placed 0.08–0.15 m above the floor — enough clearance for the body to rest on its side without clipping — and all velocities are zeroed. Full code: [`../../recovery-task/mdp/events.py`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/blob/main/recovery-task/mdp/events.py).
 
 ### The zero-action probe
 
@@ -81,7 +81,7 @@ The first build of the reset had a bug: half the "fallen" robots actually spawne
 
 **Reward shaping iteration** is one complete cycle of: design a reward, train to convergence, inspect the resulting behavior (on video, not on the number alone), identify the gap between what the reward measured and what you intended, and fix it. Chapters 12 and 13 involved iterative tuning too, but there the tracking reward provided a reference rail and the iterations were about thresholds and gating. Here, *every* reward term comes from scratch — which is why four full iterations were needed.
 
-Each attempt below uses the same `Mjlab-Recovery-Flat-Unitree-G1` task with a different reward specification. The policy is PPO trained on 2048 parallel environments for up to 2500 iterations (roughly 30–50 minutes per attempt). The reward config changes are in [`../../recovery-task/config/g1/env_cfgs.py`](../../recovery-task/config/g1/env_cfgs.py).
+Each attempt below uses the same `Mjlab-Recovery-Flat-Unitree-G1` task with a different reward specification. The policy is PPO trained on 2048 parallel environments for up to 2500 iterations (roughly 30–50 minutes per attempt). The reward config changes are in [`../../recovery-task/config/g1/env_cfgs.py`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/blob/main/recovery-task/config/g1/env_cfgs.py).
 
 ---
 
@@ -113,7 +113,7 @@ The success termination was meant as a reward for completion. It became a punish
 
 **The fix:** remove the success termination entirely. With only a timeout, the way to maximize reward is to get up *and stay up* for the full episode. Every step at full standing height earns the maximum reward, so now the optimizer wants to stand tall for as long as possible.
 
-The `stood_up` function still exists in [`../../recovery-task/mdp/`](../../recovery-task/mdp/) but is kept for offline evaluation only — it is deliberately not wired as a termination:
+The `stood_up` function still exists in [`../../recovery-task/mdp/`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/tree/main/recovery-task/mdp) but is kept for offline evaluation only — it is deliberately not wired as a termination:
 
 ```python
 # v3: do NOT terminate on success. Ending the episode the moment the robot
@@ -209,7 +209,7 @@ In words: compute how far the pelvis has traveled from floor height to standing 
 
 The gradient is constant and nonzero all the way from the floor: at every height, there is a reason to go higher. This is what the Gaussian in Attempt 1 lacked.
 
-Full reward source: [`../../recovery-task/mdp/rewards.py`](../../recovery-task/mdp/rewards.py).
+Full reward source: [`../../recovery-task/mdp/rewards.py`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/blob/main/recovery-task/mdp/rewards.py).
 
 The final weight configuration from the production config:
 
@@ -276,4 +276,4 @@ Next: [Chapter 15 — Reward Engineering as Craft](15-reward-engineering-as-craf
 
 ---
 
-*Unitree G1 on flat terrain, MuJoCo-Warp on a DGX Spark. Task: `Mjlab-Recovery-Flat-Unitree-G1` — a new task written for this spine policy. Four reward iterations, 2048 parallel environments, up to 2500 iterations per attempt. The task source (reset, reward, config) is in [`../../recovery-task/`](../../recovery-task/).*
+*Unitree G1 on flat terrain, MuJoCo-Warp on a DGX Spark. Task: `Mjlab-Recovery-Flat-Unitree-G1` — a new task written for this spine policy. Four reward iterations, 2048 parallel environments, up to 2500 iterations per attempt. The task source (reset, reward, config) is in [`../../recovery-task/`](https://github.com/chaoticcuriosity-io/g1-humanoid-rl/tree/main/recovery-task).*
